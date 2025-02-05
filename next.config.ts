@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
         hostname: "*"
       }
     ]
+  },
+  env: {
+    BASE_URL: process.env.BASE_URL
   }
 };
 
