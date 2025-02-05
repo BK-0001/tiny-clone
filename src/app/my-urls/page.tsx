@@ -1,3 +1,4 @@
+import ExternalLinkButton from "@/components/features/urls/ExternalLinkButton";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,7 +15,10 @@ import Link from "next/link";
 export default async function MyURLs() {
   // get the data
   const userId = "me";
-  const urls = await prisma.url.findMany({ where: { userId } });
+  const urls = await prisma.url.findMany({
+    where: { userId },
+    orderBy: { createAt: "desc" }
+  });
   console.log(urls);
 
   // map the data and populate them
@@ -50,6 +54,8 @@ export default async function MyURLs() {
                 </p>
               </CardContent>
               <CardFooter className="space-x-1">
+                <ExternalLinkButton id={id} longUrl={long} />
+
                 <Link href={`/my-urls/${id}`}>
                   <Button size="icon">
                     <FilePenLine />

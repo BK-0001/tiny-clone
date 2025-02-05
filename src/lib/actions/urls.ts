@@ -1,5 +1,6 @@
 "use server";
 
+import { Url } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createRandomString } from "../helpers/string";
@@ -16,4 +17,13 @@ export const createUrl = async (formData: FormData) => {
 
   revalidatePath("/my-urls");
   redirect("/my-urls");
+};
+
+export const incrementViews = async (id: Url["id"]) => {
+  await prisma.url.update({
+    where: { id },
+    data: { views: { increment: 1 } }
+  });
+
+  revalidatePath("/my-urls");
 };
