@@ -10,12 +10,18 @@ import {
   CardTitle
 } from "@/components/ui/card";
 import { prisma } from "@/lib/prisma";
+import { auth } from "@clerk/nextjs/server";
 import { FilePenLine, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 export default async function MyURLs() {
   // get the data
-  const userId = "me";
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("401, Unauthorized");
+  }
+
   const urls = await prisma.url.findMany({
     where: { userId },
     orderBy: { createAt: "desc" }
@@ -45,7 +51,7 @@ export default async function MyURLs() {
     <div className="h-full">
       <h2 className="text-2xl font-extrabold mb-4">Your recent TinyURLS</h2>
 
-      <ul>
+      <ul className="space-y-4">
         {urls.map(({ id, short, long, views, updateAt }) => (
           <li key={id}>
             <Card className="rounded-sm">
@@ -53,7 +59,7 @@ export default async function MyURLs() {
                 <CardTitle className="font-bold text-xl leading-none">
                   {process.env.BASE_URL}/{short}
                 </CardTitle>
-                <CardDescription className="text-secondary">
+                <CardDescription className="text-secondary line-clamp-2">
                   {long}
                 </CardDescription>
               </CardHeader>

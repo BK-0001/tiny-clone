@@ -1,4 +1,5 @@
 import Header from "@/components/layouts/header";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 import "./globals.css";
@@ -16,12 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${quicksand.className} antialiased`}>
-        <Header />
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${quicksand.className} antialiased`}>
+          <Header />
 
-        <main className="container mx-auto p-4">{children}</main>
-      </body>
-    </html>
+          <main className="container mx-auto p-4">{children}</main>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

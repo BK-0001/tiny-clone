@@ -18,6 +18,16 @@ export default function Navigation() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
+          <Link href="/all-urls" legacyBehavior passHref>
+            <NavigationMenuLink
+              active={pathname === "/all-urls"}
+              className={`${navigationMenuTriggerStyle()} bg-transparent`}
+            >
+              My URLS
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
           <Link href="/my-urls" legacyBehavior passHref>
             <NavigationMenuLink
               active={pathname === "/my-urls"}

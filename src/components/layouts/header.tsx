@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ClerkAuthButton from "./clerk-auth-button";
 import Navigation from "./navigation";
 
 export default function Header() {
@@ -9,7 +10,10 @@ export default function Header() {
           <h1 className="font-extrabold text-4xl">TINYURL</h1>
         </Link>
 
-        <Navigation />
+        <div className="flex items-center space-x-2">
+          <Navigation />
+          <ClerkAuthButton />
+        </div>
       </div>
     </header>
   );
