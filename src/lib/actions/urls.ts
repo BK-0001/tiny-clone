@@ -2,7 +2,7 @@
 
 import { Url } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { createRandomString } from "../helpers/string";
 import { prisma } from "../prisma";
 
@@ -26,4 +26,17 @@ export const incrementViews = async (id: Url["id"]) => {
   });
 
   revalidatePath("/my-urls");
+};
+
+export const redirectToExternalLink = async (short: Url["short"]) => {
+  const url = await prisma.url.findUnique({ where: { short } });
+
+  if (!url) {
+    // if the record is not found
+    // render not found page
+    notFound();
+  }
+
+  incrementViews(url.id);
+  redirect(url.long);
 };

@@ -21,7 +21,25 @@ export default async function MyURLs() {
     orderBy: { createAt: "desc" }
   });
 
-  // map the data and populate them
+  // update number of clicks revalidate data or use some state
+
+  /**
+   * option 1.
+   * create route handler to
+   *
+   */
+
+  /**
+   * create another page.tsx (server)
+   */
+
+  /**
+   * create another page.tsx (client)
+   */
+
+  /**
+   * use state to update ui
+   */
 
   return (
     <div className="h-full">
