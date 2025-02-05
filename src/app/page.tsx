@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
+import { createUrl } from "@/lib/actions/urls";
 import Form from "next/form";
 import Image from "next/image";
 
@@ -24,7 +25,7 @@ export default function Home() {
       />
       <Card className="max-w-[450px]">
         <CardContent className="p-4 font-semibold">
-          <Form action={""} className="space-y-4">
+          <Form action={createUrl} className="space-y-4">
             <label htmlFor="long-url" className="flex space-x-2">
               <Image src={longUrlIcon} alt="icon for shortening long url" />
               <span>Shorten a long URL</span>
