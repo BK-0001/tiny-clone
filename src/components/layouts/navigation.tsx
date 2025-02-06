@@ -11,7 +11,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navigationMenuTriggerStyle } from "../ui/navigation-menu";
 
-export default function Navigation() {
+type Props = {
+  isAuthed: boolean;
+};
+
+export default function Navigation({ isAuthed }: Props) {
   const pathname = usePathname();
 
   return (
@@ -23,20 +27,22 @@ export default function Navigation() {
               active={pathname === "/all-urls"}
               className={`${navigationMenuTriggerStyle()} bg-transparent`}
             >
-              My URLS
+              All URLS
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/my-urls" legacyBehavior passHref>
-            <NavigationMenuLink
-              active={pathname === "/my-urls"}
-              className={`${navigationMenuTriggerStyle()} bg-transparent`}
-            >
-              My URLS
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+        {isAuthed && (
+          <NavigationMenuItem>
+            <Link href="/my-urls" legacyBehavior passHref>
+              <NavigationMenuLink
+                active={pathname === "/my-urls"}
+                className={`${navigationMenuTriggerStyle()} bg-transparent`}
+              >
+                My URLS
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        )}
       </NavigationMenuList>
     </NavigationMenu>
   );
