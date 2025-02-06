@@ -1,4 +1,5 @@
 import ClipboardButton from "@/components/features/urls/clipboard-button";
+import DeleteUrlDialog from "@/components/features/urls/delete-url-dialog";
 import ExternalLinkButton from "@/components/features/urls/ExternalLinkButton";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-import { FilePenLine, Trash2 } from "lucide-react";
+import { FilePenLine } from "lucide-react";
 import Link from "next/link";
 
 export default async function MyURLs() {
@@ -86,9 +87,7 @@ export default async function MyURLs() {
                     <FilePenLine />
                   </Button>
                 </Link>
-                <Button size="icon" variant="destructive">
-                  <Trash2 />
-                </Button>
+                <DeleteUrlDialog id={id} />
               </CardFooter>
             </Card>
           </li>

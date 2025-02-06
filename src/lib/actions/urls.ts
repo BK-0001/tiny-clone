@@ -47,3 +47,10 @@ export const redirectToExternalLink = async (short: Url["short"]) => {
   incrementViews(url.id);
   redirect(url.long);
 };
+
+export const deleteUrl = async (id: Url["id"]) => {
+  await prisma.url.delete({ where: { id } });
+
+  // revalidate
+  revalidatePath("/my-urls");
+};
